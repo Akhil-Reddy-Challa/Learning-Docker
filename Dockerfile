@@ -6,6 +6,10 @@ COPY *.py .
 
 RUN apk add --update python3
 
+RUN apk add --update py-pip
+
+RUN pip install prettytable
+
 CMD ["python3", "WordCounter.py"]
 
 # 1) Building Docker Image
@@ -29,10 +33,10 @@ CMD ["python3", "WordCounter.py"]
 # Saving docker image without using pull command
 
 # 1) Get Docker Image
-    # docker save akhil9/cloud-assignment > akhil9/cloud-assignment.tar
+    # docker save akhil9/cloud-assignment > M13958007_cloud-assignment.tar
 
 # 2) Load the Image
-    # docker load -i akhil9/cloud-assignment.tar
+    # docker load -i M13958007_cloud-assignment.tar
 
 # 3) Run the Image
     # docker run -v "$(pwd)"/target:/home/data akhil9/cloud-assignment

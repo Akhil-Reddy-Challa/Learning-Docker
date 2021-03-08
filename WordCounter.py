@@ -2,8 +2,8 @@ import os
 import glob
 
 
-def validateHostVolume():
-    # if user mounts a volume to /home/data , it should be created by alpine
+def validateMountedVolume():
+    # if user mounts a volume to our container(/home/data) , it should be created by alpine
     if(os.path.exists("home/data")):
         # Now create home/output to store the result.txt file
         if not os.path.exists("home/output/"):
@@ -12,8 +12,8 @@ def validateHostVolume():
     else:
         # User did not mount any directory, exit the program
         import sys
-        correctDockerCommand = "\nCommand should like: \ndocker run -v your/system/directory:/home/data REPOSITORY_NAME"
         errMsg = "No Directory seems to be mounted, exiting ..."
+        correctDockerCommand = "\nCommand should like: \ndocker run -v your/system/directory:/home/data REPOSITORY_NAME"
         sys.exit(errMsg + correctDockerCommand)
 
 
@@ -31,9 +31,6 @@ def getAllTheTextFilesData():
         errMsg = "No text files exist in the mounted directory\n"
         sys.exit(errMsg+"exiting ...")
     else:
-        outputFile.write("\nList of text files inside(/home/data)"+"\n")
-        for fileName in all_text_files:
-            outputFile.write(fileName+"\n")
         return all_text_files
 
 
@@ -42,6 +39,16 @@ def getWordCountOfFiles():
     for file in all_text_files:
         wordCount = getWordCount(file)
         word_count_of_files.append(wordCount)
+
+    # Write file_names and word count into result.txt file
+    outputFile.write("\nList of text files inside(/home/data)"+"\n")
+    from prettytable import PrettyTable
+    t = PrettyTable()
+    t.add_column("File Name", all_text_files+[""])
+    t.add_column("Word Count", word_count_of_files+[""])
+    t.add_row(["Grand Total:", sum(word_count_of_files)])
+    outputFile.write(t.get_string())
+
     return word_count_of_files
 
 
@@ -69,8 +76,8 @@ def printOutputToConsole():
 
 if __name__ == "__main__":
 
-    # Check if our user mounted the container with required text files
-    validateHostVolume()
+    # Check if our user's mounted directory has any text files.
+    validateMountedVolume()
 
     # Preserve the root dir
     myOriginalRootDir = os.getcwd()
