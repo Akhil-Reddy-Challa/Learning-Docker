@@ -9,6 +9,7 @@ Steps to Run:
    > docker push akhil9/cloud-assignment:latest
 
 2. Running the container
+  
    On Linux Machine:
 
    > docker run -v $(pwd)/your/system/dir/with/text/files:/home/data akhil9/cloud-assignment
