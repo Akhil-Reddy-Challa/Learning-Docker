@@ -1,6 +1,6 @@
 # Docker Container
 
-This container is bundled with alpine and python, which operates on a given directory's text files.
+This container is bundled with alpine and python, which expects a dirtectory with text files to be mounted on run-time so it can lists all the files and their word counts etc.
 
 Steps to Run:
 
@@ -9,7 +9,7 @@ Steps to Run:
    > docker push akhil9/cloud-assignment:latest
 
 2. Running the container
-  
+
    On Linux Machine:
 
    > docker run -v $(pwd)/your/system/dir/with/text/files:/home/data akhil9/cloud-assignment
