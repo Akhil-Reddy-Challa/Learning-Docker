@@ -1,6 +1,6 @@
 # Docker Container
 
-This container is bundled with alpine and python, which expects a dirtectory with text files to be mounted on run-time so it can lists all the files and their word counts etc.
+This container is bundled with alpine and python, which expects a directory with text files to be mounted on run-time so it can lists all the files and their word counts etc.
 
 Steps to Run:
 
